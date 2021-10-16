@@ -7,7 +7,7 @@
 | Column             | Type     | Options                  |
 | ------------------ | ------   | -------------------------|
 | nickname           | string   | null: false              |
-| email              | string   | unique: true null: false |
+| email              | string   | unique: true,null: false |
 | encrypted_password | string   | null: false              |
 | last_name          | string   | null: false              |
 | first_name         | string   | null: false              |
@@ -44,7 +44,7 @@ has_one: order
 | user               |references | null: false foreign_key: true  |
 | item               |references | null: false foreign_key: true  |
 ## Association
-has_one: payers
+has_one: payer
 belong_to: item
 belong_to: user
 
@@ -55,9 +55,9 @@ belong_to: user
 | city               | string     | null: false                  |
 | address            | string     | null: false                  |
 | building           | string     |                              |
-| postal_code        | integer    | null: false                  | 
+| postal_code        | string     | null: false                  | 
 | phone_number       | string     | null: false                  |
-| user               | references | null: false foreign_key: true|
+| order              | references | null: false foreign_key: true|
 
 ## Association
 belong_to: order
