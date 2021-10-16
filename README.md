@@ -32,7 +32,7 @@ has_many :orders
 | shipping_agent_id  | integer     | null: false                     |
 | shopping_day_id    | integer     | null: false                     |
 | price              | integer     | null: false                     |
-| user               | references  | null: false foreign_key: true   |
+| user               | references  | null: false, foreign_key: true  |
 
 ## Association
 belong_to: user
@@ -41,23 +41,23 @@ has_one: order
 ## orders テーブル
 | Column             | Type      | Options                        |
 | ------------------ | --------- | ------------------------------ |
-| user               |references | null: false foreign_key: true  |
-| item               |references | null: false foreign_key: true  |
+| user               |references | null: false, foreign_key: true |
+| item               |references | null: false, foreign_key: true |
 ## Association
 has_one: payer
 belong_to: item
 belong_to: user
 
 ## payers テーブル
-| Column             | Type       | Options                      |
-| ------------------ | -----------| ---------------------------- |
-| shipping_agent_id  | integer    | null: false                  |
-| city               | string     | null: false                  |
-| address            | string     | null: false                  |
-| building           | string     |                              |
-| postal_code        | string     | null: false                  | 
-| phone_number       | string     | null: false                  |
-| order              | references | null: false foreign_key: true|
+| Column             | Type       | Options                       |
+| ------------------ | -----------| ----------------------------- |
+| shipping_agent_id  | integer    | null: false                   |
+| city               | string     | null: false                   |
+| address            | string     | null: false                   |
+| building           | string     |                               |
+| postal_code        | string     | null: false                   | 
+| phone_number       | string     | null: false                   |
+| order              | references | null: false, foreign_key: true|
 
 ## Association
 belong_to: order
