@@ -6,8 +6,8 @@
 
 | Column             | Type     | Options      |
 | ------------------ | ------   | -------------|
-| nickname           | string   | unique: true |
-| email              | string   | unique: true |
+| nickname           | string   | null: false  |
+| email              | string   | unique: true null: false |
 | encrypted_password | string   | null: false  |
 | last_name          | string   | null: false  |
 | first_name         | string   | null: false  |
@@ -24,20 +24,19 @@ has_many :orders
 
 | Column             | Type        | Options                         |
 | ------------------ | ----------- | ------------------------------- |
-| image              | string      | null: false                     |
 | product_name       | string      | null: false                     | 
 | explanation        | text        | null: false                     |
-| category           | integer     | null: false                     |
-| condition          | integer     | null: false                     |
-| shipping-cost      | integer     | null: false                     | 
-| shipping-agent     | integer     | null: false                     |
-| shopping-day       | integer     | null: false                     |
+| category_id           | integer     | null: false                     |
+| condition_id          | integer     | null: false                     |
+| shipping_cost_id      | integer     | null: false                     | 
+| shipping_agent_id     | integer     | null: false                     |
+| shopping_day_id       | integer     | null: false                     |
 | price              | integer     | null: false                     |
 | user               | references  | null: false foreign_key: true   |
 
 ## Association
-belong_to: users
-has_one: orders
+belong_to: user
+has_one: order
 
 ## orders テーブル
 | Column             | Type      | Options                        |
@@ -45,18 +44,20 @@ has_one: orders
 | user               |references | null: false foreign_key: true  |
 | item               |references | null: false foreign_key: true  |
 ## Association
-has_one: payer-namber
-belong_to: items
-belong_to: users
+has_one: payers
+belong_to: item
+belong_to: user
 
 ## payers テーブル
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| prefecture         | string | null: false |
-| city               | string | null: false |
-| address            | string | null: false |
-| building           | string | null: false |
-| phone-number       | string | null: false |
+| Column             | Type       | Options                      |
+| ------------------ | -----------| ---------------------------- |
+| shipping_agent_id  | integer    | null: false                  |
+| city               | string     | null: false                  |
+| address            | string     | null: false                  |
+| building           | string     |                              |
+| postal_code        | integer    | null: false                  | 
+| phone_number       | string     | null: false                  |
+| user               | references | null: false foreign_key: true|
 
 ## Association
-belong_to: orders
+belong_to: order
