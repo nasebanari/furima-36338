@@ -7,7 +7,6 @@ class User < ApplicationRecord
           validates :nickname
           validates :birthday
         end
-        validates :email, uniqueness: true
       
         validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は半角英数混合を使用してください' }
         with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'は全角文字を使用してください' } do
