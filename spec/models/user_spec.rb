@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
       end
       
       end
-    end
+  
 
       context '新規登録できない場合' do
         it "nicknameが空では登録できない" do
@@ -56,24 +56,19 @@ RSpec.describe User, type: :model do
           it 'passwordが半角英数混合でなければ登録できない' do
             @user.password = '111111'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password は半角英数混合を使用してください")
           end
           it 'passwordが半角英数混合でなければ登録できない' do
             @user.password = 'aaaaaa'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password は半角英数混合を使用してください")
           end
           it 'passwordが全角では登録できない' do
             @user.password = 'ＡＡＡＡＡＡ'
             @user.valid?
-            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password は半角英数混合を使用してください")
           end
-          it 'passwordとpassword_confirmationが一致してないと登録できない' do
-            @user.password_confirmation = '111111a'
-            @user.password == @user.password_confirmation
-            @user.valid?
-            expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-          end
+          
     
         it 'last_nameが空では登録できない' do 
          @user.last_name = ''
@@ -133,7 +128,7 @@ RSpec.describe User, type: :model do
        expect(@user.errors.full_messages).to include("Birthday can't be blank")
        end
        
-       
+      end
    end
  end
  
