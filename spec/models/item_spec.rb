@@ -96,7 +96,13 @@ describe '商品出品登録' do
     it '価格は半角数字でないければ登録できない' do
       @item.price = '１０００'
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price 半角数字300以上9999999以下で入力して下さい")    end
+      expect(@item.errors.full_messages).to include("Price 半角数字300以上9999999以下で入力して下さい") 
+     end
+    it 'userが紐付いていなければ出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
+    end
   end
 end
 end
