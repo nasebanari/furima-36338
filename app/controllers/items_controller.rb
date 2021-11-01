@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!,only:[:new, :create, :edit]
   before_action :move_to_index,only: [:edit]
-  before_action :summarize,only: [:show, :edit, :update]
+  before_action :summarize,only:[ :show, :edit, :update]
 
   def index
     @items = Item.all.order(id: "DESC")
@@ -15,25 +15,25 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.valid?
       @item.save
-      render root_path
+      redirect_to root_path
     else
       render :new
     end
   end
 
   def show
-    summarize
+
   end    
 
   def edit
-    summarize
+    
   end  
 
   def update
-    summarize
+
     if @item.update(item_params)
       
-      render item_path
+      redirect_to item_path
     else
       render :edit
     end
@@ -48,11 +48,11 @@ class ItemsController < ApplicationController
       unless current_user.id == Item.find(params[:id]).user.id
         redirect_to root_path
       end
+    end  
 
       def summarize
         @item = Item.find(params[:id])
-      end  
-    end
+      end
 
    
 end
