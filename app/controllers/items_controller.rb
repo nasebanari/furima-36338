@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!,only:[:new, :create, :edit]
   before_action :move_to_index,only: [:edit]
-  before_action :summarize,only:[ :show, :edit, :update]
+  before_action :summarize,only:[ :show, :edit, :update, :destroy]
 
   def index
     @items = Item.all.order(id: "DESC")
@@ -37,6 +37,13 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end 
+
+   def destroy
+     @item.destroy
+     redirect_to root_path
+   end
+
   end
 
     private
@@ -53,6 +60,3 @@ class ItemsController < ApplicationController
       def summarize
         @item = Item.find(params[:id])
       end
-
-   
-end
