@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
 
 
-  with_options presence: true, numericality: { other_than: 1, message: 'は−−以外を選択してください' } do
+  with_options presence: true, numericality: { other_than: 1, message: 'は−−以外を選択してください' }  do
     validates :category_id
     validates :condition_id
     validates :shipping_cost_id
@@ -20,6 +20,7 @@ class Item < ApplicationRecord
 
     has_one_attached :image
     belongs_to :user
+    has_one :order
 
 
     belongs_to_active_hash :category
