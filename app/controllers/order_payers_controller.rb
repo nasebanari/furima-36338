@@ -1,4 +1,5 @@
 class OrderPayersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :find_item, only: [:index, :create]
   before_action :move_to_root_path, only: [:index, :create]
   before_action :sold_out, only: [:index, :create]
@@ -34,8 +35,7 @@ class OrderPayersController < ApplicationController
 end
 
 def sold_out 
-  redirect_to root_path if @item.record != nil
-end
+  redirect_to root_path if @item.order!= nil
 end
 
  def pay_item

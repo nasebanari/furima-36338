@@ -80,4 +80,3 @@ RSpec.describe OrderPayer, type: :model do
     end
   end
 end
-#bundle exec rspec spec/models/order_payer_spec.rb テストコード実行 
