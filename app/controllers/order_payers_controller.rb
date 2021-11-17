@@ -9,7 +9,6 @@ class OrderPayersController < ApplicationController
 
   def create
     @order_payer = OrderPayer.new(order_payer_params)
-    # binding.pry
     if @order_payer.valid?
       pay_item
       @order_payer.save

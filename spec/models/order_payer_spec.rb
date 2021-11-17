@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderPayer, type: :model do
   before do
-    @order_payer = FactoryBot.build(:order_payer)
+    @user =FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @order_payer = FactoryBot.build(:order_payer,user_id: @user.id,item_id: @item.id)
+    sleep(1)
   end
 
   describe '商品購入' do
@@ -33,7 +36,7 @@ RSpec.describe OrderPayer, type: :model do
         expect(@order_payer.errors.full_messages).to include("Shipping agent can't be blank")
       end
       it '配送先の情報として、都道府県のIDが１だと保存できないこと' do
-        @order_payer.shipping_agent_id = ' '
+        @order_payer.shipping_agent_id = 1
         @order_payer.valid?
         expect(@order_payer.errors.full_messages).to include("Shipping agent can't be blank")
       end
@@ -62,6 +65,11 @@ RSpec.describe OrderPayer, type: :model do
         @order_payer.valid?
         expect(@order_payer.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-),Twelve or more')
       end
+      it '電話番号が9桁以下では保存できないこと' do
+        @order_payer.phone_number = '123456789'
+        @order_payer.valid?
+        expect(@order_payer.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-),Twelve or more')
+      end
       it 'tokenが空では登録できないこと' do
         @order_payer.token = ''
         @order_payer.valid?
@@ -80,3 +88,4 @@ RSpec.describe OrderPayer, type: :model do
     end
   end
 end
+#bundle exec rspec spec/models/order_payer_spec.rb テストコード実行 
